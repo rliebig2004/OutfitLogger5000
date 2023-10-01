@@ -1,35 +1,31 @@
 import { useState } from 'react'
-import reactLogo from './assets/react.svg'
-import viteLogo from '/vite.svg'
+import Sidebar from './components/sidebar';
 import './App.css'
 
-function App() {
-  const [count, setCount] = useState(0)
+export default function App() {
+  const [imageWidth, setImageWidth] = useState(50);
 
+  const handleSliderChange = (e) => {
+    const value = e.target.value;
+    setImageWidth(value);
+  }
   return (
     <>
-      <div>
-        <a href="https://vitejs.dev" target="_blank">
-          <img src={viteLogo} className="logo" alt="Vite logo" />
-        </a>
-        <a href="https://react.dev" target="_blank">
-          <img src={reactLogo} className="logo react" alt="React logo" />
-        </a>
+      <Sidebar />
+      <h1>Outift Logger 3000</h1>
+      <div className='model-container'>
+        <input
+          className='height-slider'
+          type="range"
+          id="slider"
+          min="25"
+          max="50"
+          value={imageWidth}
+          step="1"
+          onChange={handleSliderChange}
+        />
+        <img id="image" src="./images/mannequin.jpeg" alt="Image" style={{ width: `${imageWidth}%` }} />
       </div>
-      <h1>Vite + React</h1>
-      <div className="card">
-        <button onClick={() => setCount((count) => count + 1)}>
-          count is {count}
-        </button>
-        <p>
-          Edit <code>src/App.jsx</code> and save to test HMR
-        </p>
-      </div>
-      <p className="read-the-docs">
-        Click on the Vite and React logos to learn more
-      </p>
     </>
   )
 }
-
-export default App
